@@ -1,5 +1,7 @@
+import random
+
 # Tic Tac Toe Game
-# Tsion fixed 4 errors to make this game playable.
+# I fixed 4 errors to make this game playable.
 
 def draw_line(width, edge, filling): # Draws a horizontal line in the game grid.
     print(filling.join([edge] * (width + 1)))
@@ -16,7 +18,7 @@ def check_row_winner(row):
     Return the player number that wins for that row.
     If there is no winner, return 0.
     """
-    if row[0] == row[1] and row[1] == row[2] and row[0] != 0:  # Tsion fixed this: must check row[0] != 0 to avoid false win
+    if row[0] == row[1] and row[1] == row[2] and row[0] != 0:  # I fixed this: must check row[0] != 0 to avoid false win
         return row[0]
     return 0
 
@@ -45,7 +47,7 @@ def check_winner(game): # Checks if there is a winner in rows, columns, or diago
         if winner != 0:
             return winner
 
-    return 0  # Tsion fixed this: should return 0 if there's no winner (not return last winner)
+    return 0  # I fixed this: should return 0 if there's no winner (not return last winner)
 
 def start_game(): # Initializes a 3x3 board filled with zeros (0 represents an empty space).
     return [[0, 0, 0] for x in range(3)]
@@ -68,12 +70,11 @@ def add_piece(game, player, row, column): # Adds the player's move to the board.
     row: 0-index row
     column: 0-index column
     """
-    game[row][column] = player  # Tsion fixed this: it was column+1 which causes index error
+    game[row][column] = player  # I fixed this: it was column+1 which causes index error
     return game
 
 
 def check_space_empty(game, row, column): # Checks if a given space on the board is empty
-
     return game[row][column] == 0
 
 
@@ -81,8 +82,8 @@ def convert_input_to_coordinate(user_input): # Converts 1-based user input to a 
     return user_input - 1
 
 
-def switch_player(player): # Switches the current playe
-    if player == 1:  # Tsion fixed this: it was '=' instead of '=='
+def switch_player(player): # Switches the current player
+    if player == 1:  # I fixed this: it was '=' instead of '=='
         return 2
     else:
         return 1
@@ -102,17 +103,17 @@ if __name__ == '__main__':
     player = 1  # Set first player
     winner = 0 # The winner is not yet defined
     
-      # Run the loop while there are moves left & no winner
+    # Run the loop while there are moves left & no winner
     while winner == 0 and moves_exist(game):
         print("Currently player: " + str(player))
         available = False
         while not available:
             row = convert_input_to_coordinate(int(input("Which row? (start with 1) ")))
             column = convert_input_to_coordinate(int(input("Which column? (start with 1) ")))
-            available = check_space_empty(game, row, column)  # Tsion fixed this: forgot to pass column to the function
+            available = check_space_empty(game, row, column)  # I fixed this: forgot to pass column to the function
         game = add_piece(game, player, row, column)
         display_game(game)
-        winner = check_winner(game)  # Tsion re-enabled winner check (was commented out)
+        winner = check_winner(game)  # I re-enabled winner check (was commented out)
         if winner == 0:
             player = switch_player(player) # Switch to the other player
 
